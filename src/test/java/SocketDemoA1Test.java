@@ -15,7 +15,6 @@ public class SocketDemoA1Test {
         for (int i = 0; i < 4; i++) {
             new Thread(new Client("client"+(i+1))).start();
         }
-
         while (true) {
 
         }

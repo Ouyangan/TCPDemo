@@ -1,6 +1,5 @@
 /.idea/
 /TcpService.iml
-pom.xml
 src/main/resources/
 target/
 /target/

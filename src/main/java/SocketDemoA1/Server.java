@@ -13,11 +13,6 @@ import java.net.Socket;
  */
 public class Server implements Runnable {
 
-    @Override
-    public void run() {
-        new Server().start();
-    }
-
     public static void main(String[] args) {
         startServer();
 
@@ -26,20 +21,32 @@ public class Server implements Runnable {
     public static void startServer() {
 
     }
+
+    @Override
+    public void run() {
+        new Server().start();
+    }
+
     public void start() {
+        ServerSocket server = null;
         try {
-            int port=9000;
-            ServerSocket server = new ServerSocket(port);
+            int port = 9000;
+            server = new ServerSocket(port);
             System.out.println("");
-            System.out.println("start the server successful , port is:"+port+"\n");
+            System.out.println("start the server successful , port is:" + port + "\n");
             while (true) {
                 new Thread(new CustomChanel(server.accept())).start();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            if (server != null) {
+                try {
+                    server.close();
+                } catch (IOException e1) {
+                    System.out.println("server error");
+                }
+            }
         }
     }
-
 
 
     private class CustomChanel implements Runnable {
@@ -74,13 +81,14 @@ public class Server implements Runnable {
         private void receive() {
             try {
                 String msg = inputStream.readUTF();
-                System.out.println("server receive-->"+msg);
+                System.out.println("server receive-->" + msg);
             } catch (IOException e) {
                 isRunning = false;
                 CloseUtil.closeStream(inputStream, outputStream);
                 e.printStackTrace();
             }
         }
+
         @Override
         public void run() {
             while (isRunning) {
