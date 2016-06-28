@@ -14,7 +14,7 @@ public class DataMessageClientTest {
     public void startClient() throws Exception {
         DataMessage message = new DataMessage();
         DataHeader header = new DataHeader();
-        String content = "aaaaaaaaaaaaaaaaaaaaaa";
+        String content = "aaa";
         message.setContent(content);
         header.setVersion(1);
         header.setLength(content.length());
