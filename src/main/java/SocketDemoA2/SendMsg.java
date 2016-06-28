@@ -1,4 +1,4 @@
-package SocketDemoA1;
+package SocketDemoA2;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,13 +11,13 @@ import java.net.Socket;
  */
 public class SendMsg implements Runnable {
     private DataOutputStream outputStream;
-    private boolean isRunning =true;
-    private String msg;
+    private boolean isRunning = true;
+    private Message message;
     private String clientName;
 
-    public SendMsg(Socket client,String msg,String name) {
-        this.msg = msg;
-        this.clientName=name;
+    public SendMsg(Socket client, Message message, String name) {
+        this.message = message;
+        this.clientName = name;
         try {
             this.outputStream = new DataOutputStream(client.getOutputStream());
         } catch (IOException e) {
@@ -28,7 +28,10 @@ public class SendMsg implements Runnable {
 
     private void send() {
         try {
-            outputStream.writeUTF(msg);
+//            outputStream.writeBytes(message.getHeader() + message.getLength() + message.getMsg());
+            outputStream.writeBytes(message.getHeader());
+            outputStream.writeByte(message.getLength());
+            outputStream.writeBytes(message.getMsg());
             outputStream.flush();
         } catch (IOException e) {
             isRunning = false;
@@ -39,7 +42,7 @@ public class SendMsg implements Runnable {
 
     @Override
     public void run() {
-        int i=0;
+        int i = 0;
         while (isRunning) {
             send();
             i++;

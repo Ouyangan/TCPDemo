@@ -1,4 +1,4 @@
-package SocketDemoA1;
+package SocketDemoA2;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -32,7 +32,6 @@ public class Server implements Runnable {
         try {
             int port = 9000;
             server = new ServerSocket(port);
-            System.out.println("");
             System.out.println("start the server successful , port is:" + port + "\n");
             while (true) {
                 new Thread(new CustomChanel(server.accept())).start();
@@ -50,7 +49,6 @@ public class Server implements Runnable {
 
 
     private class CustomChanel implements Runnable {
-
         private DataInputStream inputStream;
         private DataOutputStream outputStream;
         private boolean isRunning = true;
@@ -80,9 +78,9 @@ public class Server implements Runnable {
 
         private void receive() {
             try {
-                String msg = inputStream.readUTF();
-                inputStream.readInt();
-                System.out.println("server receive-->" + msg);
+                byte[] bytes = new byte[10240];
+                inputStream.read(bytes);
+                System.out.println("-->"+new String(bytes));
             } catch (IOException e) {
                 isRunning = false;
                 CloseUtil.closeStream(inputStream, outputStream);

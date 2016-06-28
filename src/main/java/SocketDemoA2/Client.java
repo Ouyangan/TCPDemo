@@ -1,4 +1,4 @@
-package SocketDemoA1;
+package SocketDemoA2;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -10,25 +10,26 @@ import java.net.Socket;
  */
 public class Client implements Runnable {
     private String clientName;
+    private Message message;
 
-    public Client(String clientName) {
-        this.clientName = clientName;
-    }
-
-    private static void addClient(String clientName) throws IOException {
+    private static void addClient(String clientName, Message message) throws IOException {
         Socket client = new Socket("127.0.0.1", 9000);
-        new Thread(new SendMsg(client, clientName, clientName)).start();
+        new Thread(new SendMsg(client, message, clientName)).start();
         new Thread(new ReceiveMsg(client, clientName)).start();
     }
 
     @Override
     public void run() {
         try {
-            addClient(clientName);
+            addClient(clientName,message);
         } catch (IOException e) {
 
             e.printStackTrace();
         }
     }
 
+    public Client(String clientName, Message message) {
+        this.clientName = clientName;
+        this.message = message;
+    }
 }
