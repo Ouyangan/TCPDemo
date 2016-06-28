@@ -21,7 +21,7 @@ public class DataDecoder extends ByteToMessageDecoder {
         DataHeader dataHeader = new DataHeader(version, length);
         log.debug("ananan:{}", dataHeader.toString());
         log.debug("ananan:{}", dataHeader.toString());
-        byte[] content = byteBuf.readBytes(byteBuf.readableBytes()).asReadOnly().array();
+        byte[] content = byteBuf.readBytes(byteBuf.readableBytes()).array();
         log.debug("ananan:{}", new String(content));
 
 //        // TODO: 2016/6/29
