@@ -32,7 +32,6 @@ public class ReceiveMsg implements Runnable {
         } catch (IOException e) {
             isRunning = false;
             CloseUtil.closeStream(inputStream);
-            e.printStackTrace();
         }
     }
 

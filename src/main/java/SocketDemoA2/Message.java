@@ -21,6 +21,19 @@ public class Message {
         }
     }
 
+    /**
+     * craete aaaa protocol
+     * @param msg
+     */
+    public Message(String msg) {
+        this.header = "aaaa";
+        this.msg = msg;
+        if (msg == null || msg.length() == 0) {
+            throw new NullPointerException("数据不能为空");
+        } else {
+            this.length = msg.length();
+        }
+    }
 
     @Override
     public String toString() {
@@ -41,5 +54,15 @@ public class Message {
 
     public String getMsg() {
         return msg;
+    }
+
+    public static Message createATypeProtocol(String msg){
+        return new Message("aaaa", msg);
+    }
+    public static Message createBTypeProtocol(String msg){
+        return new Message("bbbb", msg);
+    }
+    public static Message createCTypeProtocol(String msg){
+        return new Message("cccc", msg);
     }
 }

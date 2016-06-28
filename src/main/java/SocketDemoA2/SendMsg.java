@@ -28,10 +28,7 @@ public class SendMsg implements Runnable {
 
     private void send() {
         try {
-//            outputStream.writeBytes(message.getHeader() + message.getLength() + message.getMsg());
-            outputStream.writeBytes(message.getHeader());
-            outputStream.writeByte(message.getLength());
-            outputStream.writeBytes(message.getMsg());
+            outputStream.writeUTF(message.getHeader() + message.getLength() + message.getMsg());
             outputStream.flush();
         } catch (IOException e) {
             isRunning = false;
@@ -44,9 +41,9 @@ public class SendMsg implements Runnable {
     public void run() {
         int i = 0;
         while (isRunning) {
-            send();
             i++;
-            if (i == 4) {
+            send();
+            if (i == 1) {
                 break;
             }
         }

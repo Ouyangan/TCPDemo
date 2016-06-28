@@ -13,15 +13,6 @@ import java.net.Socket;
  */
 public class Server implements Runnable {
 
-    public static void main(String[] args) {
-        startServer();
-
-    }
-
-    public static void startServer() {
-
-    }
-
     @Override
     public void run() {
         new Server().start();
@@ -78,13 +69,31 @@ public class Server implements Runnable {
 
         private void receive() {
             try {
-                byte[] bytes = new byte[10240];
-                inputStream.read(bytes);
-                System.out.println("-->"+new String(bytes));
+                String s = inputStream.readUTF();
+                String header = s.substring(0, 4);
+                int length = Integer.parseInt(s.substring(4, 5));
+                String msg = s.substring(5);
+                switch (header) {
+                    case "aaaa":
+                        System.out.println("get temperature:" + "28" + " do something");
+                        break;
+                    case "bbbb":
+                        System.out.println("get heart:" + "100" + " do something");
+                        break;
+                    case "cccc":
+                        System.out.println("get beart:" + "16" + " do something");
+                        break;
+                    default:
+                        break;
+                }
+                System.out.println("....");
             } catch (IOException e) {
                 isRunning = false;
                 CloseUtil.closeStream(inputStream, outputStream);
-                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                isRunning = false;
+                CloseUtil.closeStream(inputStream, outputStream);
+                System.out.println("数据格式异常,请核对");
             }
         }
 

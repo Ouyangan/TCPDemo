@@ -16,28 +16,22 @@ public class SocketDemoA1Test {
         for (int i = 0; i < 4; i++) {
             new Thread(new Client("client" + (i + 1))).start();
         }
-        String a = null;
-        System.out.println(a.length());
         while (true) {
-
         }
-
     }
 
     @Test
-    public void demoA2Test() throws IOException, InterruptedException {
+    public void demoA2St() throws IOException, InterruptedException {
         new Thread(new SocketDemoA2.Server()).start();
+        new Thread(new SocketDemoA2.Client("client_a ", Message.createATypeProtocol("aaaa28"))).start();
+        new Thread(new SocketDemoA2.Client("client_b ",Message.createATypeProtocol("bbbb100"))).start();
+        new Thread(new SocketDemoA2.Client("client_c ",Message.createATypeProtocol("cccc16"))).start();
         while (true) {
-
         }
     }
 
     @Test
-    public void testName() throws Exception {
-        Message a = new Message("aaaa", "data");
-        new Thread(new SocketDemoA2.Client("client_a",a)).start();
-        while (true) {
+    public void name() throws Exception {
 
-        }
     }
 }
