@@ -1,18 +1,14 @@
 package NettyDemoA1;
 
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
+ * @description: server business handler
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
-@ChannelHandler.Sharable
 public class ServerHandler extends SimpleChannelInboundHandler<Protocol> {
-    private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Protocol msg) throws Exception {

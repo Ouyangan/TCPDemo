@@ -9,11 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * @description: user client
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
 public class Client {
-    private static final Logger log = LoggerFactory.getLogger(Client.class);
+
     public static void startClient(String ip, int port, Protocol protocol) {
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();

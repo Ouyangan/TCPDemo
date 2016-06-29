@@ -5,6 +5,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 
 /**
+ * @description:  initalizer
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
