@@ -7,25 +7,28 @@ import java.io.Serializable;
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
-public class DataHeader implements Serializable {
-    private int version;
+public class ProtocolHeader implements Serializable {
+    private String type;
     private int length;
 
-
-    public DataHeader(int version, int length) {
-        this.version = version;
+    public ProtocolHeader(String type, int length) {
         this.length = length;
+        this.type = type;
     }
 
-    public DataHeader() {
+    public ProtocolHeader(String type) {
+        this.type = type;
     }
 
-    public int getVersion() {
-        return version;
+    public ProtocolHeader() {
     }
 
-    public void setVersion(int version) {
-        this.version = version;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getLength() {
@@ -38,8 +41,8 @@ public class DataHeader implements Serializable {
 
     @Override
     public String toString() {
-        return "DataHeader{" +
-                "version=" + version +
+        return "ProtocolHeader{" +
+                "type=" + type +
                 ", length=" + length +
                 '}';
     }

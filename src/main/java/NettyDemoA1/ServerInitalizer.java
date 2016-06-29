@@ -9,12 +9,11 @@ import io.netty.channel.socket.SocketChannel;
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
-public class DataMessageServerInitalizer extends ChannelInitializer<SocketChannel> {
-    private static final DataEncoder ENCODER = new DataEncoder();
+public class ServerInitalizer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast(ENCODER);
-        pipeline.addLast(new DataDecoder());
-        pipeline.addLast(new DataMessageHandler());
+        pipeline.addLast( new MsgEncoder());
+        pipeline.addLast(new MsgDecoder());
+        pipeline.addLast(new ServerHandler());
     }
 }

@@ -6,11 +6,11 @@ import org.junit.Test;
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
-public class DataServerTest {
+public class ServerTest {
 
     @Test
     public void startServer() throws Exception {
-        DataServer.startServer(8888);
+        Server.startServer(9960);
         while (true) {
 
         }

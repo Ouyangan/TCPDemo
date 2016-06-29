@@ -8,17 +8,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @Author: ouyangan
  * @Date : 2016/6/28
  */
-public class DataServer {
-    private static final Logger log = LoggerFactory.getLogger(DataServer.class);
-
-
+public class Server {
     public static void startServer(int port) {
         EventLoopGroup parentGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -27,13 +22,13 @@ public class DataServer {
         serverBootstrap.group(parentGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .handler(new LoggingHandler(LogLevel.INFO))
-                .childHandler(new DataMessageServerInitalizer());
+                .childHandler(new ServerInitalizer());
         try {
             Channel channel = serverBootstrap.bind(port).sync().channel();
-            log.info("server start successful, binding port is :{}", port);
+            LogUtil.i("server start successful, binding port is :" + port);
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error("server error:{}", e.toString());
+            LogUtil.e("server error:{}", e.toString());
         } finally {
             parentGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
